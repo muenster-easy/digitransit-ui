@@ -2,7 +2,7 @@
 import configMerger from '../util/configMerger';
 
 const CONFIG = 'herrenberg';
-const APP_TITLE = 'stadtnavi Herrenberg';
+const APP_TITLE = 'stadtnavi Münster';
 const APP_DESCRIPTION = 'Gemeinsam Mobilität neu denken - die intermodale Verbindungssuche mit offenen, lokalen Daten';
 const API_URL = process.env.API_URL || 'https://api.stadtnavi.de';
 const FEATURES_URL = 'https://featuredetails.stadtnavi.eu'
@@ -16,10 +16,12 @@ const STATIC_MESSAGE_URL =
 const parentConfig = require('./config.stadtnavi.js').default;
 
 const hostname = new URL(API_URL);
-const minLat = 47.6020;
-const maxLat = 49.0050;
-const minLon = 8.4087;
-const maxLon = 9.9014;
+const minLat = 51.8866;
+const maxLat = 52.0144;
+const minLon = 7.5057;
+const maxLon = 7.7508;
+const lat = 51.96253580871949;
+const lon = 7.6257;
 
 export default configMerger(parentConfig, {
     CONFIG,
@@ -406,7 +408,7 @@ export default configMerger(parentConfig, {
         description: APP_DESCRIPTION,
     },
 
-    logo: 'herrenberg/stadtnavi-herrenberg-logo.svg',
+    logo: 'muenster/muenster360.svg',
     secondaryLogo: 'herrenberg/stadtnavi-logo-green.svg',
 
     feedIds: ['hbg'],
@@ -414,12 +416,12 @@ export default configMerger(parentConfig, {
     searchSources: ['oa', 'osm'],
 
     searchParams: {
-        'boundary.rect.min_lat': 48.34164,
-        'boundary.rect.max_lat': 48.97661,
-        'boundary.rect.min_lon': 9.95635,
-        'boundary.rect.max_lon': 8.530883,
-        'focus.point.lat': 48.5957,
-        'focus.point.lon': 8.8675
+        'boundary.rect.min_lat': minLat,
+        'boundary.rect.max_lat': maxLat,
+        'boundary.rect.min_lon': minLon,
+        'boundary.rect.max_lon': maxLon,
+        'focus.point.lat': lat,
+        'focus.point.lon': lon
     },
 
     areaPolygon: [
@@ -430,13 +432,13 @@ export default configMerger(parentConfig, {
     ],
 
     defaultEndpoint: {
-        lat: 48.5942066,
-        lon: 8.8644041,
+        lat: lat,
+        lon: lon,
     },
 
     menu: {
         copyright: {
-            label: `© Stadt Herrenberg ${YEAR}`
+            label: `© Stadt Münster ${YEAR}`
         },
         content: [
             {
