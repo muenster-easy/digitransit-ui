@@ -7,10 +7,10 @@ const APP_DESCRIPTION = 'Münster Fast - StadtNavi';
 
 const walttiConfig = require('./config.waltti').default;
 
-const minLat = 60;
-const maxLat = 70;
-const minLon = 20;
-const maxLon = 31;
+const minLat = 51.8866;
+const maxLat = 52.0144;
+const minLon = 7.5057;
+const maxLon = 7.7508;
 
 export default configMerger(walttiConfig, {
   CONFIG,
