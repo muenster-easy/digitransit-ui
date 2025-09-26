@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  digitransit-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CONFIG: ${CONFIG:-herrenberg}
+        WEBPACK_DEVTOOL: ${WEBPACK_DEVTOOL:-}
+    image: digitransit-ui:${CONFIG:-herrenberg}
+    container_name: digitransit-ui
+    environment:
+      - CONFIG=${CONFIG:-herrenberg}
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=8080
+      - API_URL=${API_URL:-https://api.dev.stadtnavi.eu}
+      - MAP_URL=${MAP_URL:-}
+      - OTP_URL=${OTP_URL:-}
+      - GEOCODING_BASE_URL=${GEOCODING_BASE_URL:-}
+      - APP_PATH=${APP_PATH:-}
+      - ASSET_URL=${ASSET_URL:-}
+      - STATIC_MESSAGE_URL=${STATIC_MESSAGE_URL:-}
+      - RELAY_FETCH_TIMEOUT=${RELAY_FETCH_TIMEOUT:-}
+      - SENTRY_DSN=${SENTRY_DSN:-}
+      - SENTRY_SECRET_DSN=${SENTRY_SECRET_DSN:-}
+      - NODE_OPTS=${NODE_OPTS:---title=digitransit-ui}
+    ports:
+      - "${PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-fsSLI", "http://localhost:8080/"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
