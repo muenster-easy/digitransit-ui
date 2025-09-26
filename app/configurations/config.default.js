@@ -806,6 +806,7 @@ export default {
     oulu: 'oulu',
     hameenlinna: 'hameenlinna',
     matka: 'matka',
+    muenster: 'muenster',
     aachen: 'aachen',
     mobidatabw: 'mobidatabw',
     vpe: 'vpe',
