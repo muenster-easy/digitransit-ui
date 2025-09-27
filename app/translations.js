@@ -411,6 +411,7 @@ const translations = {
     'map-layer-category-shopping-services': 'Besorgungen',
     'map-layer-category-public-facilities': 'Öffentliche Einrichtungen',
     'map-layer-category-health-social-services': 'Gesundheit & Soziales',
+    'map-layer-category-other': 'Weitere Kategorien',
     open: 'Geöffnet',
     closed: 'Geschlossen',
     'about-this-service': 'Über diesen Service',

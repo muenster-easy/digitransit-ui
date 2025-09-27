@@ -15,6 +15,7 @@ import withGeojsonObjects from './map/withGeojsonObjects';
 import { MapMode } from '../constants';
 import { setMapMode } from '../action/MapModeActions';
 import LayerCategoryDropdown from './LayerCategoryDropdown';
+import LayerCategoryGroup from './LayerCategoryGroup';
 import { mapLayerOptionsShape } from '../util/shapes';
 import { getTransportModes, showCityBikes } from '../util/modeUtils';
 import { getLayerByCode } from '../util/mapLayerUtils';
@@ -247,85 +248,92 @@ const MapLayersDialogContent = (props, context) => {
       </span>
       <div className="map-layers-content">
         <div>
-          <LayerCategoryDropdown
-            icon="icon-icon_material_rail"
+          <LayerCategoryGroup
+            icon="icon-icon_public_facilities"
             title={context.intl.formatMessage({
-              id: 'map-layer-category-public-transit',
-              defaultMessage: 'Public Transit',
+              id: 'map-layer-category-other',
+              defaultMessage: 'Other',
             })}
-            onChange={updateSetting}
-            options={[
-              isTransportModeEnabled(transportModes.bus) && {
-                checked: stop.bus,
-                disabled: !!props.mapLayerOptions?.stop?.bus?.isLocked,
-                defaultMessage: 'Bus stop',
-                labelId: 'map-layer-stop-bus',
-                icon: 'icon-icon_stop_bus',
-                key: 'bus',
-                settings: { stop: 'bus' },
-              },
-              isTransportModeEnabled(transportModes.subway) && {
-                checked: terminal.subway,
-                defaultMessage: 'Subway station',
-                labelId: 'map-layer-terminal-subway',
-                icon: 'icon-icon_stop_subway',
-                key: 'subway',
-                settings: { stop: 'subway', terminal: 'subway' },
-              },
-              isTransportModeEnabled(transportModes.rail) && {
-                checked: terminal.rail,
-                defaultMessage: 'Railway station',
-                labelId: 'map-layer-terminal-rail',
-                icon: 'icon-icon_stop_rail',
-                key: 'rail',
-                settings: { stop: 'rail', terminal: 'rail' },
-              },
-              isTransportModeEnabled(transportModes.tram) && {
-                checked: stop.tram,
-                disabled: !!props.mapLayerOptions?.stop?.tram?.isLocked,
-                defaultMessage: 'Tram stop',
-                labelId: 'map-layer-stop-tram',
-                icon: 'icon-icon_stop_tram',
-                key: 'tram',
-                settings: { stop: 'tram' },
-              },
-              isTransportModeEnabled(transportModes.funicular) && {
-                checked: stop.funicular,
-                defaultMessage: 'Funicular stop',
-                labelId: 'map-layer-stop-funicular',
-                icon: 'icon-icon_stop_funicular',
-                key: 'funicular',
-                settings: { stop: 'funicular' },
-              },
-              isTransportModeEnabled(transportModes.ferry) && {
-                checked: stop.ferry,
-                disabled: !!props.mapLayerOptions?.stop?.ferry?.isLocked,
-                defaultMessage: 'Ferry',
-                labelId: 'map-layer-stop-ferry',
-                icon: 'icon-icon_stop_ferry',
-                key: 'ferry',
-                settings: { stop: 'ferry' },
-              },
-              context.config.vehicles && {
-                checked: vehicles,
-                disabled: !!props.mapLayerOptions?.vehicles?.isLocked,
-                defaultMessage: 'Moving vehicles',
-                labelId: 'map-layer-vehicles',
-                icon: 'icon-icon_moving_bus',
-                key: 'vehicles',
-                settings: 'vehicles',
-              },
-            ].sort(sortLayersByKey)}
-          />
-          <LayerCategoryDropdown
-            icon="icon-icon_bike_car"
-            title={context.intl.formatMessage({
-              id: 'map-layer-category-bicycle-car',
-              defaultMessage: 'Bicycle & Car',
-            })}
-            onChange={updateSetting}
-            options={[
-              context.config.parkAndRideForBikes &&
+          >
+            <LayerCategoryDropdown
+              icon="icon-icon_material_rail"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-public-transit',
+                defaultMessage: 'Public Transit',
+              })}
+              onChange={updateSetting}
+              options={[
+                isTransportModeEnabled(transportModes.bus) && {
+                  checked: stop.bus,
+                  disabled: !!props.mapLayerOptions?.stop?.bus?.isLocked,
+                  defaultMessage: 'Bus stop',
+                  labelId: 'map-layer-stop-bus',
+                  icon: 'icon-icon_stop_bus',
+                  key: 'bus',
+                  settings: { stop: 'bus' },
+                },
+                isTransportModeEnabled(transportModes.subway) && {
+                  checked: terminal.subway,
+                  defaultMessage: 'Subway station',
+                  labelId: 'map-layer-terminal-subway',
+                  icon: 'icon-icon_stop_subway',
+                  key: 'subway',
+                  settings: { stop: 'subway', terminal: 'subway' },
+                },
+                isTransportModeEnabled(transportModes.rail) && {
+                  checked: terminal.rail,
+                  defaultMessage: 'Railway station',
+                  labelId: 'map-layer-terminal-rail',
+                  icon: 'icon-icon_stop_rail',
+                  key: 'rail',
+                  settings: { stop: 'rail', terminal: 'rail' },
+                },
+                isTransportModeEnabled(transportModes.tram) && {
+                  checked: stop.tram,
+                  disabled: !!props.mapLayerOptions?.stop?.tram?.isLocked,
+                  defaultMessage: 'Tram stop',
+                  labelId: 'map-layer-stop-tram',
+                  icon: 'icon-icon_stop_tram',
+                  key: 'tram',
+                  settings: { stop: 'tram' },
+                },
+                isTransportModeEnabled(transportModes.funicular) && {
+                  checked: stop.funicular,
+                  defaultMessage: 'Funicular stop',
+                  labelId: 'map-layer-stop-funicular',
+                  icon: 'icon-icon_stop_funicular',
+                  key: 'funicular',
+                  settings: { stop: 'funicular' },
+                },
+                isTransportModeEnabled(transportModes.ferry) && {
+                  checked: stop.ferry,
+                  disabled: !!props.mapLayerOptions?.stop?.ferry?.isLocked,
+                  defaultMessage: 'Ferry',
+                  labelId: 'map-layer-stop-ferry',
+                  icon: 'icon-icon_stop_ferry',
+                  key: 'ferry',
+                  settings: { stop: 'ferry' },
+                },
+                context.config.vehicles && {
+                  checked: vehicles,
+                  disabled: !!props.mapLayerOptions?.vehicles?.isLocked,
+                  defaultMessage: 'Moving vehicles',
+                  labelId: 'map-layer-vehicles',
+                  icon: 'icon-icon_moving_bus',
+                  key: 'vehicles',
+                  settings: 'vehicles',
+                },
+              ].sort(sortLayersByKey)}
+            />
+            <LayerCategoryDropdown
+              icon="icon-icon_bike_car"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-bicycle-car',
+                defaultMessage: 'Bicycle & Car',
+              })}
+              onChange={updateSetting}
+              options={[
+                context.config.parkAndRideForBikes &&
                 context.config.parkAndRideForBikes.show && {
                   checked: parkAndRideForBikes,
                   defaultMessage: 'Bike parks',
@@ -338,17 +346,17 @@ const MapLayersDialogContent = (props, context) => {
                   key: 'parkAndRideForBikes',
                   settings: 'parkAndRideForBikes',
                 },
-            ]
-              .concat(
-                layerOptionsByCategory(
-                  'bicycle',
-                  config.geoJson?.layers,
-                  geoJson,
-                  props.lang,
-                ),
-              )
-              .concat([
-                context.config.roadworks &&
+              ]
+                .concat(
+                  layerOptionsByCategory(
+                    'bicycle',
+                    config.geoJson?.layers,
+                    geoJson,
+                    props.lang,
+                  ),
+                )
+                .concat([
+                  context.config.roadworks &&
                   context.config.roadworks.show && {
                     checked: roadworks,
                     defaultMessage: 'Roadworks',
@@ -358,7 +366,7 @@ const MapLayersDialogContent = (props, context) => {
                     key: 'roadworks',
                     settings: 'roadworks',
                   },
-                context.config.weatherStations &&
+                  context.config.weatherStations &&
                   context.config.weatherStations.show && {
                     checked: weatherStations,
                     defaultMessage: 'Weather stations',
@@ -371,7 +379,7 @@ const MapLayersDialogContent = (props, context) => {
                     key: 'weatherStations',
                     settings: 'weatherStations',
                   },
-                context.config.parkAndRide &&
+                  context.config.parkAndRide &&
                   context.config.parkAndRide.show && {
                     checked: parkAndRide,
                     disabled: !!props.mapLayerOptions?.parkAndRide?.isLocked,
@@ -382,7 +390,7 @@ const MapLayersDialogContent = (props, context) => {
                     key: 'parkAndRide',
                     settings: 'parkAndRide',
                   },
-                context.config.chargingStations &&
+                  context.config.chargingStations &&
                   context.config.chargingStations.show && {
                     checked: chargingStations,
                     defaultMessage: 'Charging stations',
@@ -395,27 +403,27 @@ const MapLayersDialogContent = (props, context) => {
                     key: 'chargingStations',
                     settings: 'chargingStations',
                   },
-              ])
-              .concat(
-                layerOptionsByCategory(
-                  'car',
-                  config.geoJson?.layers,
-                  geoJson,
-                  props.lang,
-                ),
-              )
-              .concat(getPoiLayers(bikeCarLayer))
-              .sort(sortLayersByKey)}
-          />
-          <LayerCategoryDropdown
-            icon="icon-icon_material_bike_scooter"
-            title={context.intl.formatMessage({
-              id: 'map-layer-category-sharing',
-              defaultMessage: 'Sharing',
-            })}
-            onChange={updateSetting}
-            options={[
-              context.config?.cityBike?.showCityBikes &&
+                ])
+                .concat(
+                  layerOptionsByCategory(
+                    'car',
+                    config.geoJson?.layers,
+                    geoJson,
+                    props.lang,
+                  ),
+                )
+                .concat(getPoiLayers(bikeCarLayer))
+                .sort(sortLayersByKey)}
+            />
+            <LayerCategoryDropdown
+              icon="icon-icon_material_bike_scooter"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-sharing',
+                defaultMessage: 'Sharing',
+              })}
+              onChange={updateSetting}
+              options={[
+                context.config?.cityBike?.showCityBikes &&
                 showCityBikes(context.config?.cityBike?.networks) && {
                   checked: rental.bicycle,
                   disabled: !!props.mapLayerOptions?.citybike?.isLocked,
@@ -429,7 +437,7 @@ const MapLayersDialogContent = (props, context) => {
                   key: 'bicycle',
                   settings: { rental: 'bicycle' },
                 },
-              context.config?.cityBike?.showCityBikes &&
+                context.config?.cityBike?.showCityBikes &&
                 showCityBikes(context.config?.cityBike?.networks) && {
                   checked: rental.scooter,
                   disabled: !!props.mapLayerOptions?.citybike?.isLocked,
@@ -443,7 +451,7 @@ const MapLayersDialogContent = (props, context) => {
                   key: 'scooter',
                   settings: { rental: 'scooter' },
                 },
-              context.config?.cityBike?.showCityBikes &&
+                context.config?.cityBike?.showCityBikes &&
                 showCityBikes(context.config?.cityBike?.networks) && {
                   checked: rental.cargo_bicycle,
                   disabled: !!props.mapLayerOptions?.citybike?.isLocked,
@@ -457,7 +465,7 @@ const MapLayersDialogContent = (props, context) => {
                   key: 'cargo_bicycle',
                   settings: { rental: 'cargo_bicycle' },
                 },
-              context.config?.cityBike?.showCityBikes &&
+                context.config?.cityBike?.showCityBikes &&
                 showCityBikes(context.config?.cityBike?.networks) && {
                   checked: rental.car,
                   disabled: !!props.mapLayerOptions?.citybike?.isLocked,
@@ -468,91 +476,93 @@ const MapLayersDialogContent = (props, context) => {
                   key: 'car',
                   settings: { rental: 'car' },
                 },
-              isTransportModeEnabled(transportModes.carpool) && {
-                checked: terminal.carpool,
-                defaultMessage: 'Carpool stops',
-                labelId: 'map-layer-carpool',
-                icon: 'icon-icon_carpool_stops',
-                dataURI: getIconFromLayerConfig('sharing_services', 'carpool'),
-                key: 'carpool',
-                settings: { stop: 'carpool', terminal: 'carpool' },
-              },
-            ]
-              .concat(getPoiLayers(sharingServicesLayer))
-              .sort(sortLayersByKey)}
-          />
-          <LayerCategoryDropdown
-            icon="icon-icon_leisure_tourism"
-            title={context.intl.formatMessage({
-              id: 'map-layer-category-leisure-tourism',
-              defaultMessage: 'Leisure & Tourism',
-            })}
-            onChange={updateSetting}
-            options={getPoiLayers(leisureAndTourismLayer)
-              .concat(
-                layerOptionsByCategory(
-                  'leisure_and_tourism',
-                  config.geoJson?.layers,
-                  geoJson,
-                  props.lang,
-                ),
-              )
-              .sort(sortLayersByKey)}
-          />
-          <LayerCategoryDropdown
-            icon="icon-icon_shopping_services"
-            title={context.intl.formatMessage({
-              id: 'map-layer-category-shopping-services',
-              defaultMessage: 'Shopping & Services',
-            })}
-            onChange={updateSetting}
-            options={getPoiLayers(shoppingAndServicesLayer)
-              .concat(
-                layerOptionsByCategory(
-                  'shopping_and_services',
-                  config.geoJson?.layers,
-                  geoJson,
-                  props.lang,
-                ),
-              )
-              .sort(sortLayersByKey)}
-          />
-          <LayerCategoryDropdown
-            icon="icon-icon_public_facilities"
-            title={context.intl.formatMessage({
-              id: 'map-layer-category-public-facilities',
-              defaultMessage: 'Public Facilities',
-            })}
-            onChange={updateSetting}
-            options={getPoiLayers(publicFacilitiesLayer)
-              .concat(
-                layerOptionsByCategory(
-                  'public_facilities',
-                  config.geoJson?.layers,
-                  geoJson,
-                  props.lang,
-                ),
-              )
-              .sort(sortLayersByKey)}
-          />
-          <LayerCategoryDropdown
-            icon="icon-icon_health_social_services"
-            title={context.intl.formatMessage({
-              id: 'map-layer-category-health-social-services',
-              defaultMessage: 'Health & Social Services',
-            })}
-            onChange={updateSetting}
-            options={getPoiLayers(healthAndSocialServicesLayer)
-              .concat(
-                layerOptionsByCategory(
-                  'health_and_social_services',
-                  config.geoJson?.layers,
-                  geoJson,
-                  props.lang,
-                ),
-              )
-              .sort(sortLayersByKey)}
-          />
+                isTransportModeEnabled(transportModes.carpool) && {
+                  checked: terminal.carpool,
+                  defaultMessage: 'Carpool stops',
+                  labelId: 'map-layer-carpool',
+                  icon: 'icon-icon_carpool_stops',
+                  dataURI: getIconFromLayerConfig('sharing_services', 'carpool'),
+                  key: 'carpool',
+                  settings: { stop: 'carpool', terminal: 'carpool' },
+                },
+              ]
+                .concat(getPoiLayers(sharingServicesLayer))
+                .sort(sortLayersByKey)}
+            />
+            <LayerCategoryDropdown
+              icon="icon-icon_leisure_tourism"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-leisure-tourism',
+                defaultMessage: 'Leisure & Tourism',
+              })}
+              onChange={updateSetting}
+              options={getPoiLayers(leisureAndTourismLayer)
+                .concat(
+                  layerOptionsByCategory(
+                    'leisure_and_tourism',
+                    config.geoJson?.layers,
+                    geoJson,
+                    props.lang,
+                  ),
+                )
+                .sort(sortLayersByKey)}
+            />
+
+            <LayerCategoryDropdown
+              icon="icon-icon_shopping_services"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-shopping-services',
+                defaultMessage: 'Shopping & Services',
+              })}
+              onChange={updateSetting}
+              options={getPoiLayers(shoppingAndServicesLayer)
+                .concat(
+                  layerOptionsByCategory(
+                    'shopping_and_services',
+                    config.geoJson?.layers,
+                    geoJson,
+                    props.lang,
+                  ),
+                )
+                .sort(sortLayersByKey)}
+            />
+            <LayerCategoryDropdown
+              icon="icon-icon_public_facilities"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-public-facilities',
+                defaultMessage: 'Public Facilities',
+              })}
+              onChange={updateSetting}
+              options={getPoiLayers(publicFacilitiesLayer)
+                .concat(
+                  layerOptionsByCategory(
+                    'public_facilities',
+                    config.geoJson?.layers,
+                    geoJson,
+                    props.lang,
+                  ),
+                )
+                .sort(sortLayersByKey)}
+            />
+            <LayerCategoryDropdown
+              icon="icon-icon_health_social_services"
+              title={context.intl.formatMessage({
+                id: 'map-layer-category-health-social-services',
+                defaultMessage: 'Health & Social Services',
+              })}
+              onChange={updateSetting}
+              options={getPoiLayers(healthAndSocialServicesLayer)
+                .concat(
+                  layerOptionsByCategory(
+                    'health_and_social_services',
+                    config.geoJson?.layers,
+                    geoJson,
+                    props.lang,
+                  ),
+                )
+                .sort(sortLayersByKey)}
+            />
+          </LayerCategoryGroup>
         </div>
 
         <p className="panel-maptype-title">
