@@ -591,6 +591,7 @@ export default configMerger(parentConfig, {
     staticMessagesUrl: STATIC_MESSAGE_URL,
 
     featuresUrl: FEATURES_URL,
+    issueTrackerUrl: 'https://beteiligung.nrw.de/portal/muenster/beteiligung/themen/1003255',
     
     parkAndRideBannedVehicleParkingTags: [
         'lot_type:Parkplatz',
